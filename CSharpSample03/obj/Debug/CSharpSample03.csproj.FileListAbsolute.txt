@@ -1,0 +1,16 @@
+C:\Users\202007\Desktop\CSharpSample03\CSharpSample03\CSharpSample03\bin\Debug\CSharpSample03.exe.config
+C:\Users\202007\Desktop\CSharpSample03\CSharpSample03\CSharpSample03\bin\Debug\CSharpSample03.exe
+C:\Users\202007\Desktop\CSharpSample03\CSharpSample03\CSharpSample03\bin\Debug\CSharpSample03.pdb
+C:\Users\202007\Desktop\CSharpSample03\CSharpSample03\CSharpSample03\obj\Debug\CSharpSample03.csprojAssemblyReference.cache
+C:\Users\202007\Desktop\CSharpSample03\CSharpSample03\CSharpSample03\obj\Debug\SampleApp3.g.cs
+C:\Users\202007\Desktop\CSharpSample03\CSharpSample03\CSharpSample03\obj\Debug\App.g.cs
+C:\Users\202007\Desktop\CSharpSample03\CSharpSample03\CSharpSample03\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\202007\Desktop\CSharpSample03\CSharpSample03\CSharpSample03\obj\Debug\CSharpSample03_MarkupCompile.cache
+C:\Users\202007\Desktop\CSharpSample03\CSharpSample03\CSharpSample03\obj\Debug\CSharpSample03_MarkupCompile.lref
+C:\Users\202007\Desktop\CSharpSample03\CSharpSample03\CSharpSample03\obj\Debug\SampleApp3.baml
+C:\Users\202007\Desktop\CSharpSample03\CSharpSample03\CSharpSample03\obj\Debug\CSharpSample03.g.resources
+C:\Users\202007\Desktop\CSharpSample03\CSharpSample03\CSharpSample03\obj\Debug\CSharpSample03.Properties.Resources.resources
+C:\Users\202007\Desktop\CSharpSample03\CSharpSample03\CSharpSample03\obj\Debug\CSharpSample03.csproj.GenerateResource.cache
+C:\Users\202007\Desktop\CSharpSample03\CSharpSample03\CSharpSample03\obj\Debug\CSharpSample03.csproj.CoreCompileInputs.cache
+C:\Users\202007\Desktop\CSharpSample03\CSharpSample03\CSharpSample03\obj\Debug\CSharpSample03.exe
+C:\Users\202007\Desktop\CSharpSample03\CSharpSample03\CSharpSample03\obj\Debug\CSharpSample03.pdb
