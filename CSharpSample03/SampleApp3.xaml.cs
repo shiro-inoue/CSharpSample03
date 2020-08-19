@@ -23,33 +23,38 @@ namespace CSharpSample03
         public MainWindow()
         {
             InitializeComponent();
-            loadAppSetting();
         }
 
         // アプリ設定値の読み込み
         private void loadAppSetting()
         {
-            this.Left = Properties.Settings.Default.left;
-            this.Top = Properties.Settings.Default.top;
-            this.Width = Properties.Settings.Default.width;
-            this.Height = Properties.Settings.Default.height;
-            this.textBoxImagePath.Text = Properties.Settings.Default.imagePath;
+            Left = Properties.Settings.Default.left;
+            Top = Properties.Settings.Default.top;
+            Width = (Properties.Settings.Default.width == 0) ? 800 : Properties.Settings.Default.width;
+            Height = (Properties.Settings.Default.height == 0) ? 600 : Properties.Settings.Default.height;
+            textBoxImagePath.Text = Properties.Settings.Default.imagePath;
         }
  
         // アプリ設定値の保存
         private void saveAppSetting()
         {
-            Properties.Settings.Default.left = this.Left;
-            Properties.Settings.Default.top = this.Top;
-            Properties.Settings.Default.width = this.Width;
-            Properties.Settings.Default.height = this.Height;
-            Properties.Settings.Default.imagePath = this.textBoxImagePath.Text;
+            Properties.Settings.Default.left = Left;
+            Properties.Settings.Default.top = Top;
+            Properties.Settings.Default.width = Width;
+            Properties.Settings.Default.height = Height;
+            Properties.Settings.Default.imagePath = textBoxImagePath.Text;
             Properties.Settings.Default.Save();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            loadAppSetting();
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             saveAppSetting();
         }
+
     }
 }

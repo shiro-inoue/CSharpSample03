@@ -5,42 +5,79 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CSharpSample03"
         mc:Ignorable="d"
-        Title="フェーズ4 Wpf XAML課題 サンプル" Height="600" Width="800" Closing="Window_Closing">
+        Title="フェーズ4 Wpf XAML課題 サンプル" Closing="Window_Closing" Loaded="Window_Loaded">
     <Window.Resources>
         <local:ScaleValueConverter x:Key="scalevalueConverter" />
         <local:RotationValueConverter x:Key="rotationValueConverter" />
+        <Style TargetType="GroupBox">
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="Margin" Value="1,1,0,1"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+        </Style>
+
+        <Style TargetType="TextBlock">
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="5,5,5,5"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+
+        <Style TargetType="Slider">
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Margin" Value="5,5,5,5"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+            <Setter Property="Width" Value="80"/>
+            <Setter Property="IsSnapToTickEnabled" Value="True"/>
+        </Style>
+
+        <Style TargetType="Button">
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="Margin" Value="5,5,5,5"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Width" Value="35"/>
+        </Style>
+
+        <Style TargetType="TextBox">
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Height" Value="25"/>
+            <Setter Property="Margin" Value="1,18,0,1"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+            <Setter Property="Width" Value="275"/>
+        </Style>
+
     </Window.Resources>
 
     <DockPanel>
         <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
-            <GroupBox x:Name="groupBoxOperation" Header="操作" HorizontalAlignment="Left" Height="50" Margin="1,1,0,1" VerticalAlignment="Top" Width="50">
-                <Button x:Name="buttonOpen" Content="開く" HorizontalAlignment="Center" Height="50" Margin="5,5,5,5" VerticalAlignment="Center" Width="35"/>
+            <GroupBox x:Name="groupBoxOperation" Header="操作" Width="50">
+                <Button x:Name="buttonOpen" Content="開く"/>
             </GroupBox>
-            <GroupBox x:Name="groupBoxThumbnailSize" Header="サムネイルのサイズ" HorizontalAlignment="Left" Height="50" Margin="1,1,0,1" VerticalAlignment="Top" Width="150">
+            <GroupBox x:Name="groupBoxThumbnailSize" Header="サムネイルのサイズ" Width="150">
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock x:Name="textBlockThumbnailSize" HorizontalAlignment="Center" Margin="5,5,5,5" TextWrapping="Wrap" Text="Middle" VerticalAlignment="Center"/>
-                    <Slider x:Name="sliderThumbnailSize" HorizontalAlignment="Left" Margin="5,5,5,5" VerticalAlignment="Top" Width="80" TickPlacement="BottomRight" Minimum="1" Maximum="3" Value="2" IsSnapToTickEnabled="True"/>
+                    <TextBlock x:Name="textBlockThumbnailSize" Text="Middle"/>
+                    <Slider x:Name="sliderThumbnailSize" TickPlacement="BottomRight" Minimum="1" Maximum="3" Value="2"/>
                 </StackPanel>
             </GroupBox>
-            <GroupBox x:Name="groupBoxScale" Header="拡大/縮小" HorizontalAlignment="Left" Height="50" Margin="1,1,0,1" VerticalAlignment="Top" Width="150">
+            <GroupBox x:Name="groupBoxScale" Header="拡大/縮小" Width="150">
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock x:Name="textBlockScale" HorizontalAlignment="Center" Margin="5,5,5,5" TextWrapping="Wrap" VerticalAlignment="Center"
-                                   Text="{Binding ElementName=sliderScale, Path=Value, Converter={StaticResource scalevalueConverter}}"/>
-                    <Slider x:Name="sliderScale" HorizontalAlignment="Left" Margin="5,5,5,5" VerticalAlignment="Top" Width="80" Minimum="0.1" Maximum="5" Value="1" IsSnapToTickEnabled="True" TickFrequency="0.1"/>
+                    <TextBlock x:Name="textBlockScale" Text="{Binding ElementName=sliderScale, Path=Value, Converter={StaticResource scalevalueConverter}}"/>
+                    <Slider x:Name="sliderScale" Minimum="0.1" Maximum="5" Value="1" TickFrequency="0.1"/>
                 </StackPanel>
             </GroupBox>
-            <GroupBox x:Name="groupBoxRotation" Header="回転" HorizontalAlignment="Left" Height="50" Margin="1,1,0,1" VerticalAlignment="Top" Width="150">
+            <GroupBox x:Name="groupBoxRotation" Header="回転" Width="150">
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock x:Name="textBlockRotation" HorizontalAlignment="Center" Margin="5,5,5,5" TextWrapping="Wrap" VerticalAlignment="Center" RenderTransformOrigin="3.018,-8.658"
-                    Text="{Binding ElementName=sliderRotation, Path=Value, Converter={StaticResource rotationValueConverter}}"/>
-                    <Slider x:Name="sliderRotation" HorizontalAlignment="Left" Margin="5,5,5,5" VerticalAlignment="Top" Width="80" Maximum="360" IsSnapToTickEnabled="True"/>
+                    <TextBlock x:Name="textBlockRotation" RenderTransformOrigin="3.018,-8.658" Text="{Binding ElementName=sliderRotation, Path=Value, Converter={StaticResource rotationValueConverter}}"/>
+                    <Slider x:Name="sliderRotation" Maximum="360"/>
                 </StackPanel>
             </GroupBox>
-            <TextBox x:Name="textBoxImagePath" HorizontalAlignment="Left" Height="25" Margin="1,18,0,1" TextWrapping="Wrap" VerticalAlignment="Top" Width="275"/>
+            <TextBox x:Name="textBoxImagePath"/>
         </StackPanel>
 
-        <ListBox DockPanel.Dock="Top" Height="100" Margin="0,0,0,0"/>
-        <ScrollViewer DockPanel.Dock="Bottom">
+        <ListBox DockPanel.Dock="Top" Height="100"/>
+        <ScrollViewer>
             <Image Source="C:\Users\202007\Desktop\f3e235602824c4c784146b9a3c662554.jpg" Stretch="None">
                 <Image.LayoutTransform>
                     <TransformGroup>
