@@ -5,10 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CSharpSample03"
         mc:Ignorable="d"
-        Title="フェーズ4 Wpf XAML課題 サンプル" Closing="Window_Closing" Loaded="Window_Loaded">
+        Title="フェーズ4 Wpf XAML課題" Closing="Window_Closing" Loaded="Window_Loaded">
     <Window.Resources>
         <local:ScaleValueConverter x:Key="scalevalueConverter" />
         <local:RotationValueConverter x:Key="rotationValueConverter" />
+        <local:ThumbnailSizeConverter x:Key="thumbnailSizeConverter" />
+        <local:ThumbnailHeightConverter x:Key="thumbnailHeightConverter" />
+        <local:ThumbnailWidthConverter x:Key="thumbnailWidthConverter" />
+        <local:BitmapImageConverter x:Key="bitmapImageConverter"/>
         <Style TargetType="GroupBox">
             <Setter Property="HorizontalAlignment" Value="Left"/>
             <Setter Property="Height" Value="50"/>
@@ -25,7 +29,7 @@
 
         <Style TargetType="Slider">
             <Setter Property="HorizontalAlignment" Value="Left"/>
-            <Setter Property="Margin" Value="5,5,5,5"/>
+            <Setter Property="Margin" Value="0,5,0,0"/>
             <Setter Property="VerticalAlignment" Value="Top"/>
             <Setter Property="Width" Value="80"/>
             <Setter Property="IsSnapToTickEnabled" Value="True"/>
@@ -45,19 +49,25 @@
             <Setter Property="Margin" Value="1,18,0,1"/>
             <Setter Property="TextWrapping" Value="Wrap"/>
             <Setter Property="VerticalAlignment" Value="Top"/>
-            <Setter Property="Width" Value="275"/>
+            <Setter Property="Width" Value="600"/>
         </Style>
 
+        <Style TargetType="ListBox">
+            <Setter Property="MinHeight" Value="80"/>
+            <Setter Property="Height" Value="Auto"/>
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
+            <Setter Property="SelectionMode" Value="Single"/>
+        </Style>
     </Window.Resources>
 
     <DockPanel>
         <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
             <GroupBox x:Name="groupBoxOperation" Header="操作" Width="50">
-                <Button x:Name="buttonOpen" Content="開く"/>
+                <Button x:Name="buttonOpen" Content="開く" Click="ButtonOpen_Click"/>
             </GroupBox>
             <GroupBox x:Name="groupBoxThumbnailSize" Header="サムネイルのサイズ" Width="150">
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock x:Name="textBlockThumbnailSize" Text="Middle"/>
+                    <TextBlock x:Name="textBlockThumbnailSize" Text="{Binding ElementName=sliderThumbnailSize, Path=Value, Converter={StaticResource thumbnailSizeConverter}}" Width="40"/>
                     <Slider x:Name="sliderThumbnailSize" TickPlacement="BottomRight" Minimum="1" Maximum="3" Value="2"/>
                 </StackPanel>
             </GroupBox>
@@ -70,15 +80,31 @@
             <GroupBox x:Name="groupBoxRotation" Header="回転" Width="150">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock x:Name="textBlockRotation" RenderTransformOrigin="3.018,-8.658" Text="{Binding ElementName=sliderRotation, Path=Value, Converter={StaticResource rotationValueConverter}}"/>
-                    <Slider x:Name="sliderRotation" Maximum="360"/>
+                    <Slider x:Name="sliderRotation" Maximum="360" LargeChange="90"/>
                 </StackPanel>
             </GroupBox>
-            <TextBox x:Name="textBoxImagePath"/>
+            <TextBox x:Name="textBoxImagePath" Text="{Binding ElementName=listBoxThumbnail, Path=SelectedItem.filePath}" IsReadOnly="True"/>
         </StackPanel>
 
-        <ListBox DockPanel.Dock="Top" Height="100"/>
+        <ListBox x:Name="listBoxThumbnail" DockPanel.Dock="Top" ItemsSource="{Binding}">
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel />
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Border>
+                        <Image Source="{Binding filePath, Converter={StaticResource bitmapImageConverter}}" Stretch="Fill"
+                               Width="{Binding ElementName=sliderThumbnailSize, Path=Value, Converter={StaticResource thumbnailWidthConverter}}"
+                               Height="{Binding ElementName=sliderThumbnailSize, Path=Value, Converter={StaticResource thumbnailHeightConverter}}"/>
+                    </Border>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
         <ScrollViewer>
-            <Image Source="C:\Users\202007\Desktop\f3e235602824c4c784146b9a3c662554.jpg" Stretch="None">
+            <Image Source="{Binding ElementName=textBoxImagePath, Path=Text}" Stretch="None">
                 <Image.LayoutTransform>
                     <TransformGroup>
                         <ScaleTransform ScaleX="{Binding ElementName=sliderScale, Path=Value}" ScaleY="{Binding ElementName=sliderScale, Path=Value}"/>

@@ -17,5 +17,8 @@
     <Setting Name="imagePath" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
+    <Setting Name="maximized" Type="System.Windows.WindowState" Scope="User">
+      <Value Profile="(Default)">Normal</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

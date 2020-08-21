@@ -82,5 +82,17 @@ namespace CSharpSample03.Properties {
                 this["imagePath"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Normal")]
+        public global::System.Windows.WindowState maximized {
+            get {
+                return ((global::System.Windows.WindowState)(this["maximized"]));
+            }
+            set {
+                this["maximized"] = value;
+            }
+        }
     }
 }
