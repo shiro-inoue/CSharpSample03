@@ -56,12 +56,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="BitmapImageConverter.cs" />
-    <Compile Include="RotationValueConverter.cs" />
-    <Compile Include="ScaleValueConverter.cs" />
-    <Compile Include="ThumbnailHeightConverter.cs" />
-    <Compile Include="ThumbnailSizeConverter.cs" />
-    <Compile Include="ThumbnailWidthConverter.cs" />
+    <Compile Include="Converters\BitmapImageConverter.cs" />
+    <Compile Include="Converters\RotationValueConverter.cs" />
+    <Compile Include="Converters\ScaleValueConverter.cs" />
+    <Compile Include="Converters\ThumbnailHeightConverter.cs" />
+    <Compile Include="Converters\ThumbnailSizeConverter.cs" />
+    <Compile Include="Converters\ThumbnailWidthConverter.cs" />
     <Page Include="SampleApp3.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
