@@ -88,7 +88,8 @@ namespace CSharpSample03
                 // 画像ファイルを対象とする
                 if (ImageExtensions.Contains(System.IO.Path.GetExtension(f).ToUpperInvariant()))
                 {
-                    images.Add(new Image() { filePath = f });
+                    var name = f.ToString().Substring(f.ToString().LastIndexOf(@"\") + 1);
+                    images.Add(new Image { filePath = f, fileName = name });
                     // フォルダ指定時の初期表示する画像ファイルの設定
                     if (string.IsNullOrEmpty(firstDrawImagePath))
                     {
@@ -103,5 +104,6 @@ namespace CSharpSample03
     class Image
     {
         public string filePath { get; set; }
+        public string fileName { get; set; }
     }
 }

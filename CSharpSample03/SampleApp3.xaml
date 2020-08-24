@@ -94,11 +94,12 @@
             </ListBox.ItemsPanel>
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Border>
+                    <StackPanel>
+                        <TextBlock Text="{Binding fileName}"/>
                         <Image Source="{Binding filePath, Converter={StaticResource bitmapImageConverter}}" Stretch="Fill"
                                Width="{Binding ElementName=sliderThumbnailSize, Path=Value, Converter={StaticResource thumbnailWidthConverter}}"
                                Height="{Binding ElementName=sliderThumbnailSize, Path=Value, Converter={StaticResource thumbnailHeightConverter}}"/>
-                    </Border>
+                    </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
