@@ -20,27 +20,26 @@ namespace CSharpSample03
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            loadAppSetting();
+            LoadAppSetting();
             // 保存されたフォルダのサムネイルを表示
             if (File.Exists(textBoxImagePath.Text))
             {
-                string firstDrawImagePath = String.Empty;
-                getThumbnail(textBoxImagePath.Text.Substring(0, textBoxImagePath.Text.LastIndexOf(@"\")), ref firstDrawImagePath);
+                _ = GetImageInfo(GetFolderPath(textBoxImagePath.Text));
             }
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            saveAppSetting();
+            SaveAppSetting();
         }
 
         private void ButtonOpen_Click(object sender, RoutedEventArgs e)
         {
-            openFolderDialog();
+            OpenFolderDialog();
         }
 
         // アプリ設定値の読み込み
-        private void loadAppSetting()
+        private void LoadAppSetting()
         {
             Left = Properties.Settings.Default.left;
             Top = Properties.Settings.Default.top;
@@ -52,7 +51,7 @@ namespace CSharpSample03
         }
 
         // アプリ設定値の保存
-        private void saveAppSetting()
+        private void SaveAppSetting()
         {
             Properties.Settings.Default.left = Left;
             Properties.Settings.Default.top = Top;
@@ -66,30 +65,29 @@ namespace CSharpSample03
         }
 
         // フォルダ選択ダイアログの生成
-        private void openFolderDialog()
+        private void OpenFolderDialog()
         {
             FolderBrowserDialog fo = new FolderBrowserDialog();
             fo.RootFolder = Environment.SpecialFolder.Desktop;
 
             if (fo.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                string firstDrawImagePath = String.Empty;
-                getThumbnail(fo.SelectedPath, ref firstDrawImagePath);
-                textBoxImagePath.Text = firstDrawImagePath;
+                textBoxImagePath.Text = GetImageInfo(fo.SelectedPath);
             }
         }
 
-        private void getThumbnail(string path, ref string firstDrawImagePath)
+        private string GetImageInfo(string path)
         {
+            string firstDrawImagePath = String.Empty;
             string[] files = Directory.GetFiles(path);
-            var images = new List<Image>();
+            var imageInfo = new List<ImageInfo>();
             foreach (var f in files)
             {
                 // 画像ファイルを対象とする
                 if (ImageExtensions.Contains(System.IO.Path.GetExtension(f).ToUpperInvariant()))
                 {
-                    var name = f.ToString().Substring(f.ToString().LastIndexOf(@"\") + 1);
-                    images.Add(new Image { filePath = f, fileName = name });
+                    string name = GetFileName(f.ToString());
+                    imageInfo.Add(new ImageInfo { fileFullPath = f, fileName = name });
                     // フォルダ指定時の初期表示する画像ファイルの設定
                     if (string.IsNullOrEmpty(firstDrawImagePath))
                     {
@@ -97,13 +95,24 @@ namespace CSharpSample03
                     }
                 }
             }
-            DataContext = images;
+            DataContext = imageInfo;
+            return firstDrawImagePath;
+        }
+
+        private string GetFolderPath(string filePath)
+        {
+            return filePath.Substring(0, filePath.LastIndexOf(@"\"));
+        }
+
+        private string GetFileName(string filePath)
+        {
+            return filePath.Substring(filePath.LastIndexOf(@"\") + 1);
         }
     }
 
-    class Image
+    class ImageInfo
     {
-        public string filePath { get; set; }
+        public string fileFullPath { get; set; }
         public string fileName { get; set; }
     }
 }

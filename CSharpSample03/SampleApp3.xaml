@@ -83,7 +83,7 @@
                     <Slider x:Name="sliderRotation" Maximum="360" LargeChange="90"/>
                 </StackPanel>
             </GroupBox>
-            <TextBox x:Name="textBoxImagePath" Text="{Binding ElementName=listBoxThumbnail, Path=SelectedItem.filePath}" IsReadOnly="True"/>
+            <TextBox x:Name="textBoxImagePath" Text="{Binding ElementName=listBoxThumbnail, Path=SelectedItem.fileFullPath}" IsReadOnly="True"/>
         </StackPanel>
 
         <ListBox x:Name="listBoxThumbnail" DockPanel.Dock="Top" ItemsSource="{Binding}">
@@ -96,7 +96,7 @@
                 <DataTemplate>
                     <StackPanel>
                         <TextBlock Text="{Binding fileName}"/>
-                        <Image Source="{Binding filePath, Converter={StaticResource bitmapImageConverter}}" Stretch="Fill"
+                        <Image Source="{Binding fileFullPath, Converter={StaticResource bitmapImageConverter}}" Stretch="Fill"
                                Width="{Binding ElementName=sliderThumbnailSize, Path=Value, Converter={StaticResource thumbnailWidthConverter}}"
                                Height="{Binding ElementName=sliderThumbnailSize, Path=Value, Converter={StaticResource thumbnailHeightConverter}}"/>
                     </StackPanel>
