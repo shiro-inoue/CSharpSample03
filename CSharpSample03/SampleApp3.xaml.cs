@@ -81,17 +81,17 @@ namespace CSharpSample03
             string firstDrawImagePath = String.Empty;
             string[] files = Directory.GetFiles(path);
             var imageInfo = new List<ImageInfo>();
-            foreach (var f in files)
+            foreach (var file in files)
             {
                 // 画像ファイルを対象とする
-                if (ImageExtensions.Contains(System.IO.Path.GetExtension(f).ToUpperInvariant()))
+                if (ImageExtensions.Contains(System.IO.Path.GetExtension(file).ToUpperInvariant()))
                 {
-                    string name = GetFileName(f.ToString());
-                    imageInfo.Add(new ImageInfo { fileFullPath = f, fileName = name });
+                    string name = GetFileName(file.ToString());
+                    imageInfo.Add(new ImageInfo { fileFullPath = file, fileName = name });
                     // フォルダ指定時の初期表示する画像ファイルの設定
                     if (string.IsNullOrEmpty(firstDrawImagePath))
                     {
-                        firstDrawImagePath = f.ToString();
+                        firstDrawImagePath = file.ToString();
                     }
                 }
             }

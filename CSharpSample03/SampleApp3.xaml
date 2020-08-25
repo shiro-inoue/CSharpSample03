@@ -86,16 +86,20 @@
             <TextBox x:Name="textBoxImagePath" Text="{Binding ElementName=listBoxThumbnail, Path=SelectedItem.fileFullPath}" IsReadOnly="True"/>
         </StackPanel>
 
+        <!--ItemsSourceプロパティにDataContextをセットして一覧表示-->
         <ListBox x:Name="listBoxThumbnail" DockPanel.Dock="Top" ItemsSource="{Binding}">
+            <!--WrapPanelで項目を水平方向に並べ、収まらない場合は次の行に送る-->
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel />
                 </ItemsPanelTemplate>
             </ListBox.ItemsPanel>
+
+            <!--ItemTemplateプロパティにはDataTemplateを指定、DataContextをどのように表示するかを決定-->
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
-                        <TextBlock Text="{Binding fileName}"/>
+                        <TextBlock Text="{Binding fileName}" Width="{Binding ElementName=sliderThumbnailSize, Path=Value, Converter={StaticResource thumbnailWidthConverter}}"/>
                         <Image Source="{Binding fileFullPath, Converter={StaticResource bitmapImageConverter}}" Stretch="Fill"
                                Width="{Binding ElementName=sliderThumbnailSize, Path=Value, Converter={StaticResource thumbnailWidthConverter}}"
                                Height="{Binding ElementName=sliderThumbnailSize, Path=Value, Converter={StaticResource thumbnailHeightConverter}}"/>
