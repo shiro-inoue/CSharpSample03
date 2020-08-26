@@ -62,7 +62,7 @@
     <Compile Include="Converters\ThumbnailHeightConverter.cs" />
     <Compile Include="Converters\ThumbnailSizeConverter.cs" />
     <Compile Include="Converters\ThumbnailWidthConverter.cs" />
-    <Page Include="SampleApp3.xaml">
+    <Page Include="WpfApp4View.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -70,8 +70,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="SampleApp3.xaml.cs">
-      <DependentUpon>SampleApp3.xaml</DependentUpon>
+    <Compile Include="WpfApp4View.xaml.cs">
+      <DependentUpon>WpfApp4View.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
