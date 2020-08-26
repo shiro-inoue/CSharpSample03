@@ -12,6 +12,7 @@ namespace CSharpSample03
     public partial class MainWindow : Window
     {
         public static readonly List<string> ImageExtensions = new List<string> { ".JPG", ".JPE", ".BMP", ".GIF", ".PNG" };
+        private List<WpfApp4ViewModel> viewModel = new List<WpfApp4ViewModel>();
 
         public MainWindow()
         {
@@ -86,14 +87,13 @@ namespace CSharpSample03
         {
             string firstDrawImagePath = String.Empty;
             string[] files = Directory.GetFiles(path);
-            var imageInfo = new List<ImageInfo>();
             foreach (var file in files)
             {
                 // 画像ファイルを対象とする
                 if (ImageExtensions.Contains(System.IO.Path.GetExtension(file).ToUpperInvariant()))
                 {
                     string name = GetFileName(file.ToString());
-                    imageInfo.Add(new ImageInfo { fileFullPath = file, fileName = name });
+                    viewModel.Add(new WpfApp4ViewModel { fileFullPath = file, fileName = name });
                     // フォルダ指定時の初期表示する画像ファイルの設定
                     if (string.IsNullOrEmpty(firstDrawImagePath))
                     {
@@ -101,7 +101,7 @@ namespace CSharpSample03
                     }
                 }
             }
-            DataContext = imageInfo;
+            DataContext = viewModel;
             return firstDrawImagePath;
         }
 
@@ -114,11 +114,5 @@ namespace CSharpSample03
         {
             return filePath.Substring(filePath.LastIndexOf(@"\") + 1);
         }
-    }
-
-    class ImageInfo
-    {
-        public string fileFullPath { get; set; }
-        public string fileName { get; set; }
     }
 }
