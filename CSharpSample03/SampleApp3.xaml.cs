@@ -21,11 +21,7 @@ namespace CSharpSample03
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             LoadAppSetting();
-            // 保存されたフォルダのサムネイルを表示
-            if (File.Exists(textBoxImagePath.Text))
-            {
-                _ = GetImageInfo(GetFolderPath(textBoxImagePath.Text));
-            }
+            RedisplayThumbnail();
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -76,6 +72,16 @@ namespace CSharpSample03
             }
         }
 
+        // 保存されたフォルダのサムネイルを表示
+        private void RedisplayThumbnail()
+        {
+            if (File.Exists(textBoxImagePath.Text))
+            {
+                _ = GetImageInfo(GetFolderPath(textBoxImagePath.Text));
+            }
+        }
+
+        // 画像ファイル情報を取得
         private string GetImageInfo(string path)
         {
             string firstDrawImagePath = String.Empty;
