@@ -8,8 +8,7 @@ namespace CSharpSample03
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            double textValue = (double)value * 40;
-            return String.Format("{0}", textValue);
+            return String.Format("{0}", (double)value * 40);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

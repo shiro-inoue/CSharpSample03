@@ -8,8 +8,7 @@ namespace CSharpSample03
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            double textValue = (double)value;
-            return String.Format("{0:000}度：", textValue);
+            return String.Format("{0:000}度：", (double)value);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

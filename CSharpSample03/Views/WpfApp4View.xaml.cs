@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Windows;
-using System.Windows.Forms;
+//using System.Windows.Forms; MessageBox出力時に明示する必要が出るらしいのでコメントアウト
 
 namespace CSharpSample03
 {
@@ -64,7 +65,7 @@ namespace CSharpSample03
         // フォルダ選択ダイアログの生成
         private void OpenFolderDialog()
         {
-            FolderBrowserDialog fo = new FolderBrowserDialog();
+            var fo = new System.Windows.Forms.FolderBrowserDialog();
             fo.RootFolder = Environment.SpecialFolder.Desktop;
 
             if (fo.ShowDialog() == System.Windows.Forms.DialogResult.OK)
@@ -78,42 +79,19 @@ namespace CSharpSample03
         {
             if (File.Exists(textBoxImagePath.Text))
             {
-                _ = GetImageInfo(GetFolderPath(textBoxImagePath.Text));
+                _ = GetImageInfo(Path.GetDirectoryName(textBoxImagePath.Text));
             }
         }
 
         // 画像ファイル情報を取得
         private string GetImageInfo(string path)
         {
-            var viewModel = new List<WpfApp4ViewModel>();
-            string firstDrawImagePath = String.Empty;
             string[] files = Directory.GetFiles(path);
-            foreach (var file in files)
-            {
-                // 画像ファイルを対象とする
-                if (ImageExtensions.Contains(System.IO.Path.GetExtension(file).ToUpperInvariant()))
-                {
-                    string name = GetFileName(file.ToString());
-                    viewModel.Add(new WpfApp4ViewModel { fileFullPath = file, fileName = name });
-                    // フォルダ指定時の初期表示する画像ファイルの設定
-                    if (string.IsNullOrEmpty(firstDrawImagePath))
-                    {
-                        firstDrawImagePath = file.ToString();
-                    }
-                }
-            }
-            DataContext = viewModel;
-            return firstDrawImagePath;
-        }
+            var images = files.Where(f => ImageExtensions.Contains(System.IO.Path.GetExtension(f).ToUpperInvariant()))
+                              .Select(f => new WpfApp4ViewModel(){fileFullPath = f, fileName = Path.GetFileName(f)});
 
-        private string GetFolderPath(string filePath)
-        {
-            return filePath.Substring(0, filePath.LastIndexOf(@"\"));
-        }
-
-        private string GetFileName(string filePath)
-        {
-            return filePath.Substring(filePath.LastIndexOf(@"\") + 1);
+            DataContext = images;
+            return images.Count != 0? images[0].fileFullPath: String.Empty;
         }
     }
 }
