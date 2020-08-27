@@ -9,12 +9,12 @@ namespace CSharpSample03
     /// <summary>
     /// MainWindow.xaml の相互作用ロジック
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class WpfApp4View : Window
     {
         public static readonly List<string> ImageExtensions = new List<string> { ".JPG", ".JPE", ".BMP", ".GIF", ".PNG" };
         //private List<WpfApp4ViewModel> viewModel = new List<WpfApp4ViewModel>();
 
-        public MainWindow()
+        public WpfApp4View()
         {
             InitializeComponent();
         }
