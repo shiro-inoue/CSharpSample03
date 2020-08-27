@@ -12,7 +12,7 @@ namespace CSharpSample03
     public partial class MainWindow : Window
     {
         public static readonly List<string> ImageExtensions = new List<string> { ".JPG", ".JPE", ".BMP", ".GIF", ".PNG" };
-        private List<WpfApp4ViewModel> viewModel = new List<WpfApp4ViewModel>();
+        //private List<WpfApp4ViewModel> viewModel = new List<WpfApp4ViewModel>();
 
         public MainWindow()
         {
@@ -85,6 +85,7 @@ namespace CSharpSample03
         // 画像ファイル情報を取得
         private string GetImageInfo(string path)
         {
+            var viewModel = new List<WpfApp4ViewModel>();
             string firstDrawImagePath = String.Empty;
             string[] files = Directory.GetFiles(path);
             foreach (var file in files)
