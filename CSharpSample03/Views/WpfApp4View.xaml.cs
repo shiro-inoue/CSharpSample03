@@ -88,7 +88,7 @@ namespace CSharpSample03
         {
             string[] files = Directory.GetFiles(path);
             var images = files.Where(f => ImageExtensions.Contains(System.IO.Path.GetExtension(f).ToUpperInvariant()))
-                              .Select(f => new WpfApp4ViewModel(){fileFullPath = f, fileName = Path.GetFileName(f)});
+                              .Select(f => new WpfApp4ViewModel(){fileFullPath = f, fileName = Path.GetFileName(f)}).ToList();
 
             DataContext = images;
             return images.Count != 0? images[0].fileFullPath: String.Empty;
